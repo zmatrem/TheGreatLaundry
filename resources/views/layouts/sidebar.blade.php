@@ -51,7 +51,7 @@
                 <div class="collapse" id="dashboard">
                   <ul class="nav nav-collapse">
                     <li>
-                      <a href="{{ route('pesanan') }}">
+                      <a href="{{ route('pesanan.index') }}">
 
                         <span class="sub-item">Pesanan</span>
                       </a>
@@ -61,7 +61,7 @@
                 <div class="collapse" id="dashboard">
                   <ul class="nav nav-collapse">
                     <li>
-                      <a href="{{ route('layanan') }}">
+                      <a href="{{ route('layanan.index') }}">
 
                         <span class="sub-item">Layanan</span>
                       </a>

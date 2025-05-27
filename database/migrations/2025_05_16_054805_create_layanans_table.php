@@ -9,21 +9,18 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
-    {
-        Schema::create('layanan', function (Blueprint $table) {
-            $table->id();
-            $table->enum('layanan', ['CuBer','Paket Lengkap','Setrika Doang']);
-            $table->integer('harga');
-            $table->timestamps();
-        });
-    }
+  public function up(): void
+{
+    Schema::table('layanan', function (Blueprint $table) {
+        $table->enum('layanan', ['Menunggu', 'Diproses', 'Selesai'])->default('Menunggu');
+    });
+}
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
-    {
-        Schema::dropIfExists('layanan');
-    }
+public function down(): void
+{
+    Schema::table('layanan', function (Blueprint $table) {
+        $table->dropColumn('layanan');
+    });
+}
+
 };

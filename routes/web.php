@@ -30,3 +30,5 @@ Route::get('/user', function () {
     return view('user.index');
 })->name('user.index');
 Route::resource('pengguna', \App\Http\Controllers\PenggunaController::class);
+Route::resource('pesanan', \App\Http\Controllers\PesananController::class);
+Route::resource('layanan', \App\Http\Controllers\LayananController::class);

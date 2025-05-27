@@ -32,14 +32,14 @@ class PenggunaController extends Controller
     {
         // Validasi input yang benar
         $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:penggunas,email', // sesuaikan nama tabel
+            'nama' => 'required|string|max:255',
+            'email' => 'required|email|unique:pengguna,email', // sesuaikan nama tabel
             'role' => 'required|string',
         ]);
 
         // Simpan data pengguna baru
         Pengguna::create([
-            'name' => $request->name,
+            'nama' => $request->nama,
             'email' => $request->email,
             'role' => $request->role,
         ]);
@@ -61,13 +61,13 @@ class PenggunaController extends Controller
     public function update(Request $request, Pengguna $pengguna)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:penggunas,email,' . $pengguna->id,
+            'nama' => 'required|string|max:255',
+            'email' => 'required|email|unique:pengguna,email,' . $pengguna->id,
             'role' => 'required|string',
         ]);
 
         $pengguna->update([
-            'name' => $request->name,
+            'nama' => $request->nama,
             'email' => $request->email,
             'role' => $request->role,
         ]);

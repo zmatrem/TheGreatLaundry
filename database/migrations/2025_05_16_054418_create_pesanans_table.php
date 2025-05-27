@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('pesanan', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
-            $table->enum('layanan', ['CuBer','Paket Lengkap','Setrika Doang']);
-            $table->enum('status', ['Pending', 'Inprogress', 'Complete']);
+            $table->enum('layanan', ['CuBer','CuAng','PaKap'.'SiLus']);
+            $table->enum('status', ['Menunggu', 'Diproses', 'Selesai']);
             $table->timestamps();
         });
     }

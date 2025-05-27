@@ -4,55 +4,36 @@
 <div class="container">
   <div class="page-inner">
     <div class="page-header">
-      <h4 class="page-title">Edit Data Laundry</h4>
+      <h4 class="page-title">Edit Data Pengguna</h4>
     </div>
 
     <div class="row">
       <div class="col-md-8">
         <div class="card">
           <div class="card-header">
-            <div class="card-title">Form Edit Laundry</div>
+            <div class="card-title">Form Edit Pengguna</div>
           </div>
           <div class="card-body">
-            <form action="{{ route('laundry.update', $laundry->id) }}" method="POST">
+            <form action="{{ route('pengguna.update', $pengguna->id) }}" method="POST">
               @csrf
               @method('PUT')
 
               <div class="form-group">
-                <label>Nama Customer</label>
-                <input type="text" name="customer_name" class="form-control" value="{{ $laundry->customer_name }}" required>
+                <label>Nama</label>
+                <input type="text" name="nama" class="form-control" value="{{ $pengguna->nama }}" required>
               </div>
 
               <div class="form-group">
-                <label>No. Telepon</label>
-                <input type="text" name="phone" class="form-control" value="{{ $laundry->phone }}" required>
+                <label>Email</label>
+                <input type="email" name="email" class="form-control" value="{{ $pengguna->email }}" required>
               </div>
 
               <div class="form-group">
-                <label>Jenis Layanan</label>
-                <select name="service_type" class="form-control" required>
-                  <option value="Cuci Kering" {{ $laundry->service_type == 'Cuci Kering' ? 'selected' : '' }}>Cuci Kering</option>
-                  <option value="Cuci Setrika" {{ $laundry->service_type == 'Cuci Setrika' ? 'selected' : '' }}>Cuci Setrika</option>
-                  <option value="Setrika" {{ $laundry->service_type == 'Setrika' ? 'selected' : '' }}>Setrika</option>
-                </select>
-              </div>
-
-              <div class="form-group">
-                <label>Berat (kg)</label>
-                <input type="number" name="weight" step="0.1" class="form-control" value="{{ $laundry->weight }}" required>
-              </div>
-
-              <div class="form-group">
-                <label>Total Harga (Rp)</label>
-                <input type="number" name="price" class="form-control" value="{{ $laundry->price }}" required>
-              </div>
-
-              <div class="form-group">
-                <label>Status</label>
-                <select name="status" class="form-control" required>
-                  <option value="pending" {{ $laundry->status == 'pending' ? 'selected' : '' }}>Pending</option>
-                  <option value="processing" {{ $laundry->status == 'processing' ? 'selected' : '' }}>Processing</option>
-                  <option value="done" {{ $laundry->status == 'done' ? 'selected' : '' }}>Done</option>
+                <label>Role</label>
+                <select name="role" class="form-control" required>
+                  <option value="Pelanggan" {{ $pengguna->role == 'Pelanggan' ? 'selected' : '' }}>Pelanggan</option>
+                  <option value="Staff" {{ $pengguna->role == 'Staff' ? 'selected' : '' }}>Staff</option>
+                  <option value="Owner" {{ $pengguna->role == 'Owner' ? 'selected' : '' }}>Owner</option>
                 </select>
               </div>
 

@@ -11,17 +11,17 @@ class PesananController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
-    $pesanan = pesanan::all();
-        return view('pesanan',compact('pesanan'));  
-      }
+{
+    $pesanans = Pesanan::paginate(10); // contoh pagination 10 per halaman
+    return view('pesanan.index', compact('pesanans'));
+}
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        return view('Pesanan.create');
+        return view('pesanan.create');
     }
 
     /**
@@ -36,8 +36,8 @@ class PesananController extends Controller
 
         ]);
 
-        Pesanan::create($request->all());
-        return redirect ()->route('Pesanan.index')
+        pesanan::create($request->all());
+        return redirect ()->route('pesanan.index')
                         ->with('success','Pesanan Berhasil Ditambahkan.');
     }
 
@@ -54,8 +54,8 @@ class PesananController extends Controller
      */
     Public function edit($id)
     {
-        $Pesanan = Pesanan::findOrFail($id);
-        return view ('Pesanan.edit', compact('Pesanan'));
+        $pesanan = Pesanan::findOrFail($id);
+        return view ('pesanan.edit', compact('pesanan'));
     }
 
     /**
@@ -70,9 +70,9 @@ class PesananController extends Controller
 
         ]);
 
-        $Pesanan = Pesanan::findOrFail($id);
-        $Pesanan->update($request->all());
-        return redirect ()->route('Pesanan.index')
+        $pesanan = Pesanan::findOrFail($id);
+        $pesanan->update($request->all());
+        return redirect ()->route('pesanan.index')
                         ->with('success','Pesanan Berhasil DiUbah.');
     }
 
@@ -81,10 +81,10 @@ class PesananController extends Controller
      */
     public function destroy($id)
     {
-        $Pesanan =Pesanan::findOrFail($id);
-        $Pesanan->delete();
+        $pesanan =Pesanan::findOrFail($id);
+        $pesanan->delete();
 
-        return redirect()->route('Pesanan.index')
+        return redirect()->route('pesanan.index')
                         ->with('success','Pesanan Berhasil di Hapus');
     }
 }

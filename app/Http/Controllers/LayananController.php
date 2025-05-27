@@ -11,11 +11,11 @@ class LayananController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        $layanan = layanan::all();
-        return view('layanan',compact('layanan'));
-    }
+   public function index()
+{
+    $layanans = layanan::paginate(10); // contoh pagination 10 per halaman
+    return view('layanan.index', compact('layanans'));
+}
 
     /**
      * Show the form for creating a new resource.
@@ -30,9 +30,9 @@ class LayananController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'layanan' => 'required',
-            'harga'=> 'required|integer',
+          $request->validate([
+        'layanan' => 'required|in:CuBer,CuAng,PaKap,CiLus',
+        'harga' => 'required|integer',
 
         ]);
 
@@ -55,7 +55,7 @@ class LayananController extends Controller
     public function edit($id)
     {
         $layanan = layanan::findOrFail($id);
-        return view ('Layanan.edit', compact('layanan'));
+        return view ('layanan.edit', compact('layanan'));
     }
 
     /**
@@ -68,8 +68,8 @@ class LayananController extends Controller
             'harga'=> 'required|integer',
 
         ]);
-        $Layanan = Layanan::findOrFail($id);
-        $Layanan->update($request->all());
+        $layanan = layanan::findOrFail($id);
+        $layanan->update($request->all());
         return redirect ()->route('layanan.index')
                         ->with('success','Layanan Berhasil DiUbah.');
     }

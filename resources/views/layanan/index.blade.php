@@ -9,7 +9,7 @@
         <h6 class="op-7 mb-2">Manajemen Transaksi Laundry</h6>
       </div>
       <div class="ms-md-auto py-2 py-md-0">
-        <a href="{{ route('pengguna.create') }}" class="btn btn-primary btn-round">Tambah Data</a>
+        <a href="{{ route('layanan.create') }}" class="btn btn-primary btn-round">Tambah Data</a>
       </div>
     </div>
 
@@ -18,33 +18,30 @@
       <div class="col-md-12">
         <div class="card">
           <div class="card-header">
-            <h4 class="card-title">Daftar Laundry</h4>
+            <h4 class="card-title">Daftar Layanan</h4>
           </div>
           <div class="card-body">
             <div class="table-responsive">
               <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                    <th>Nama</th>
-                    <th>Email</th>
-                    <th>Role</th>
-                    
+                    <th>Layanan</th>
+                    <th>Harga</th>
                   </tr>
                 </thead>
                 <tbody>
-                  @forelse($penggunas as $index => $pengguna)
+                  @forelse($layanans as $index => $layanan)
                   <tr>
-                    <td>{{ $pengguna->nama }}</td>
-                    <td>{{ $pengguna->email }}</td>
-                    <td>{{ $pengguna->role }}</td>
-                    <td>
-                      <span class="badge bg-{{ $pengguna->status === 'done' ? 'success' : ($pengguna->status === 'processing' ? 'warning' : 'secondary') }}">
-                        {{ ucfirst($pengguna->status) }}
-                      </span>
+                    <td>{{ $layanan->layanan }}</td>
+                    <td>{{ $layanan->harga }}</td>
+					<td>
+  					<span class="badge bg-{{ $layanan->status === 'done' ? 'success' : ($layanan->status === 'processing' ? 'warning' : 'secondary') }}">
+    		{{ ucfirst($layanan->status) }}
+  						</span>
                     </td>
                     <td>
-                      <a href="{{ route('pengguna.edit', $pengguna->id) }}" class="btn btn-sm btn-info">Edit</a>
-                      <form action="{{ route('pengguna.destroy', $pengguna->id) }}" method="POST" style="display:inline;">
+                      <a href="{{ route('layanan.edit', $layanan->id) }}" class="btn btn-sm btn-info">Edit</a>
+                      <form action="{{ route('layanan.destroy', $layanan->id) }}" method="POST" style="display:inline;">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Hapus data ini?')">Hapus</button>
@@ -58,7 +55,7 @@
                   @endforelse
                 </tbody>
               </table>
-              {{ $penggunas->links() }} <!-- Pagination -->
+              {{ $layanans->links() }} <!-- Pagination -->
             </div>
           </div>
         </div>

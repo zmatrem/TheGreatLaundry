@@ -9,7 +9,7 @@
         <h6 class="op-7 mb-2">Manajemen Transaksi Laundry</h6>
       </div>
       <div class="ms-md-auto py-2 py-md-0">
-        <a href="{{ route('pengguna.create') }}" class="btn btn-primary btn-round">Tambah Data</a>
+        <a href="{{ route('pesanan.create') }}" class="btn btn-primary btn-round">Tambah Data</a>
       </div>
     </div>
 
@@ -26,25 +26,25 @@
                 <thead>
                   <tr>
                     <th>Nama</th>
-                    <th>Email</th>
-                    <th>Role</th>
+                    <th>Layanan</th>
+                    <th>Status</th>
                     
                   </tr>
                 </thead>
                 <tbody>
-                  @forelse($penggunas as $index => $pengguna)
+                  @forelse($pesanans as $index => $pesanan)
                   <tr>
-                    <td>{{ $pengguna->nama }}</td>
-                    <td>{{ $pengguna->email }}</td>
-                    <td>{{ $pengguna->role }}</td>
+                    <td>{{ $pesanan->nama }}</td>
+                    <td>{{ $pesanan->layanan }}</td>
+                    <td>{{ $pesanan->status }}</td>
                     <td>
-                      <span class="badge bg-{{ $pengguna->status === 'done' ? 'success' : ($pengguna->status === 'processing' ? 'warning' : 'secondary') }}">
-                        {{ ucfirst($pengguna->status) }}
+                      <span class="badge bg-{{ $pesanan->status === 'done' ? 'success' : ($pesanan->status === 'processing' ? 'warning' : 'secondary') }}">
+                        {{ ucfirst($pesanan->status) }}
                       </span>
                     </td>
                     <td>
-                      <a href="{{ route('pengguna.edit', $pengguna->id) }}" class="btn btn-sm btn-info">Edit</a>
-                      <form action="{{ route('pengguna.destroy', $pengguna->id) }}" method="POST" style="display:inline;">
+                      <a href="{{ route('pesanan.edit', $pesanan->id) }}" class="btn btn-sm btn-info">Edit</a>
+                      <form action="{{ route('pesanan.destroy', $pesanan->id) }}" method="POST" style="display:inline;">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Hapus data ini?')">Hapus</button>
@@ -58,7 +58,7 @@
                   @endforelse
                 </tbody>
               </table>
-              {{ $penggunas->links() }} <!-- Pagination -->
+              {{ $pesanans->links() }} <!-- Pagination -->
             </div>
           </div>
         </div>
