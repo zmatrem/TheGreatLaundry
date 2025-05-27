@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Pengguna;
 use Illuminate\Http\Request;
-use Illuminate\support\Facades\Hash;
 
 class PenggunaController extends Controller
 {
@@ -12,17 +11,18 @@ class PenggunaController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
-        $pengguna = pengguna::all();
-        return view('pengguna',compact('pengguna'));
-    }
+{
+    $penggunas = Pengguna::paginate(10); // contoh pagination 10 per halaman
+    return view('pengguna.index', compact('penggunas'));
+}
+
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        return view ('pengguna.create');
+        return view('pengguna.create');
     }
 
     /**
@@ -30,61 +30,57 @@ class PenggunaController extends Controller
      */
     public function store(Request $request)
     {
+        // Validasi input yang benar
         $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:penggunas,email', // sesuaikan nama tabel
+            'role' => 'required|string',
+        ]);
+
+        // Simpan data pengguna baru
+        Pengguna::create([
             'name' => $request->name,
             'email' => $request->email,
             'role' => $request->role,
-
         ]);
 
-        return redirect()->route('pengguna.index')->with('Success','Pengguna Berhasil Ditambahkan');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Pengguna $Pengguna)
-    {
-        //
+        return redirect()->route('pengguna.index')->with('success', 'Pengguna Berhasil Ditambahkan');
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Request$request,Pengguna $Pengguna)
+    public function edit(Pengguna $pengguna)
     {
-        
-        return view('Pengguna.edit',compact ('Pengguna'));
+        return view('pengguna.edit', compact('pengguna'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Pengguna $Pengguna)
+    public function update(Request $request, Pengguna $pengguna)
     {
         $request->validate([
-        'name' => 'required|string|max:255',
-        'email' => 'required|email|unique:Pengguna,email,'. $Pengguna->id,
-        'role' => 'required|in:admin,staff,Pelanggan',
-
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:penggunas,email,' . $pengguna->id,
+            'role' => 'required|string',
         ]);
 
-        $Pengguna->update( [
+        $pengguna->update([
             'name' => $request->name,
             'email' => $request->email,
             'role' => $request->role,
-
         ]);
 
-        return redirect()->route('Pengguna.index')->with('Success','Pengguna Berhasil DiUbah');
+        return redirect()->route('pengguna.index')->with('success', 'Pengguna Berhasil Diubah');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Pengguna $Pengguna)
+    public function destroy(Pengguna $pengguna)
     {
-        $Pengguna->delete();
-        return redirect()->route('Pengguna.index')->with('Success','Pengguna Berhasil DiHapus');
+        $pengguna->delete();
+        return redirect()->route('pengguna.index')->with('success', 'Pengguna Berhasil Dihapus');
     }
 }

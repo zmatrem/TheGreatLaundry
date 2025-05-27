@@ -82,6 +82,9 @@
                             <a href="contact.html" class="nav-item nav-link"
                                 >Kontak</a
                             >
+                            <a href="welcome" class="nav-item nav-link"
+                                >Admin Only (18+)</a
+                            >
                         </div>
                     </div>
                 </nav>

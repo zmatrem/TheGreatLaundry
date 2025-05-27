@@ -29,3 +29,4 @@ Route::get('/welcome', [WelcomeController::class, 'index'])->name('welcome');
 Route::get('/user', function () {
     return view('user.index');
 })->name('user.index');
+Route::resource('pengguna', \App\Http\Controllers\PenggunaController::class);
