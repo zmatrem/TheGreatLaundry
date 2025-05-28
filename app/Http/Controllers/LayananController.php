@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\layanan;
+use App\Models\Layanan;
 use App\Models\Pengguna;
 use Illuminate\Http\Request;
 
@@ -13,7 +13,7 @@ class LayananController extends Controller
      */
    public function index()
 {
-    $layanans = layanan::paginate(10); // contoh pagination 10 per halaman
+    $layanans = Layanan::paginate(10); // contoh pagination 10 per halaman
     return view('layanan.index', compact('layanans'));
 }
 
